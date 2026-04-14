@@ -1,10 +1,28 @@
 import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
 import { useState } from "react";
 import { usePortfolioPage } from "@/hooks/usePortfolioPage";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const orderedPaths = ["/", "/profile", "/projects", "/thanks"];
 
 export default function BottomPlayer() {
     const [playing, setPlaying] = useState(true);
     const { data } = usePortfolioPage();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const currentIndex = orderedPaths.indexOf(location.pathname);
+
+    const goBack = () => {
+        if (currentIndex > 0) navigate(orderedPaths[currentIndex - 1]);
+        else window.history.back();
+    };
+
+    const goForward = () => {
+        if (currentIndex >= 0 && currentIndex < orderedPaths.length - 1)
+            navigate(orderedPaths[currentIndex + 1]);
+        else window.history.forward();
+    };
 
     const trackTitle =
         data?.musicPlayer?.trackTitle || "Đang khám phá Portfolio";
@@ -29,7 +47,10 @@ export default function BottomPlayer() {
 
             {/* Controls */}
             <div className="flex items-center justify-center gap-4 flex-1">
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
+                <button
+                    onClick={goBack}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                     <SkipBack size={18} />
                 </button>
                 <button
@@ -42,7 +63,10 @@ export default function BottomPlayer() {
                         <Play size={18} className="text-background ml-0.5" />
                     )}
                 </button>
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
+                <button
+                    onClick={goForward}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                     <SkipForward size={18} />
                 </button>
             </div>

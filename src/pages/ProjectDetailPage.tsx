@@ -74,6 +74,16 @@ export default function ProjectDetailPage() {
     const listHeaderLabel = project.listHeaderLabel || "KẾT QUẢ ĐẠT ĐƯỢC";
     const cardGradient = getProjectCardGradient(project.cardGradient, 0);
     const cardEmoji = getProjectCardEmoji(project.cardEmoji, 0);
+    const descriptionLines = (project.description || "")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+    const bulletItems = descriptionLines
+        .filter((line) => /^[-*•]\s+/.test(line))
+        .map((line) => line.replace(/^[-*•]\s+/, ""));
+    const shouldRenderBullets =
+        bulletItems.length > 0 &&
+        bulletItems.length === descriptionLines.length;
 
     return (
         <div className="min-h-[calc(100vh-72px)] bg-linear-to-b from-[hsl(var(--surface-elevated))] via-background to-background">
@@ -132,7 +142,17 @@ export default function ProjectDetailPage() {
 
                     {project.description ? (
                         <div className="max-w-4xl text-muted-foreground text-lg font-medium leading-relaxed mb-12">
-                            <p>{project.description}</p>
+                            {shouldRenderBullets ? (
+                                <ul className="list-disc pl-6 space-y-2">
+                                    {bulletItems.map((item, index) => (
+                                        <li key={`${item}-${index}`}>{item}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="whitespace-pre-line">
+                                    {project.description}
+                                </p>
+                            )}
                         </div>
                     ) : null}
 
