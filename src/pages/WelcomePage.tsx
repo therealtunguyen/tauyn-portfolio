@@ -3,10 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import spotifyLogo from "@/assets/spotify-logo.svg";
+import { usePortfolioPage } from "@/hooks/usePortfolioPage";
 
 export default function WelcomePage() {
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const { data } = usePortfolioPage();
+
+    const heading =
+        data?.hero?.heading || "Chào mừng\nđến với\nPortfolio của tôi";
+    const subheading =
+        data?.hero?.subheading ||
+        "Một bộ sưu tập chọn lọc về công việc, kỹ năng và kinh nghiệm của tôi.";
+    const inputPlaceholder =
+        data?.hero?.inputPlaceholder || "Nhập tên của bạn để bắt đầu...";
+    const buttonContinue = data?.hero?.buttonContinue || "Tiếp tục";
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] px-6">
@@ -32,16 +43,11 @@ export default function WelcomePage() {
                     />
                 </motion.div>
 
-                <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-4 leading-tight">
-                    Chào mừng
-                    <br />
-                    đến với
-                    <br />
-                    Portfolio của tôi
+                <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-4 leading-tight whitespace-pre-line">
+                    {heading}
                 </h1>
                 <p className="text-muted-foreground text-lg mb-10">
-                    Một bộ sưu tập chọn lọc về công việc, kỹ năng và kinh nghiệm
-                    của tôi.
+                    {subheading}
                 </p>
 
                 <div className="relative max-w-lg mx-auto mb-8">
@@ -53,7 +59,7 @@ export default function WelcomePage() {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Nhập tên của bạn để bắt đầu..."
+                        placeholder={inputPlaceholder}
                         className="w-full h-12 pl-12 pr-4 rounded-full bg-card text-foreground placeholder:text-muted-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring"
                     />
                 </div>
@@ -64,7 +70,7 @@ export default function WelcomePage() {
                     onClick={() => navigate("/profile")}
                     className="h-12 px-10 rounded-full bg-spotify-green text-primary-foreground font-bold text-base hover:bg-spotify-green-hover transition-colors"
                 >
-                    Tiếp tục
+                    {buttonContinue}
                 </motion.button>
 
                 <div className="mt-16 flex justify-center gap-6 opacity-30">

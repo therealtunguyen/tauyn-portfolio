@@ -1,22 +1,28 @@
 import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
 import { useState } from "react";
+import { usePortfolioPage } from "@/hooks/usePortfolioPage";
 
 export default function BottomPlayer() {
     const [playing, setPlaying] = useState(true);
+    const { data } = usePortfolioPage();
+
+    const trackTitle =
+        data?.musicPlayer?.trackTitle || "Đang khám phá Portfolio";
+    const artistName = data?.musicPlayer?.artistName || "Phạm Hoàng Thảo Uyên";
 
     return (
-        <footer className="fixed bottom-0 left-0 right-0 h-[72px] bg-card border-t border-border z-50 flex items-center px-4 md:px-6">
+        <footer className="fixed bottom-0 left-0 right-0 h-18 bg-card border-t border-border z-50 flex items-center px-4 md:px-6">
             {/* Now playing */}
             <div className="flex items-center gap-3 w-1/3 min-w-0">
-                <div className="w-10 h-10 rounded bg-spotify-green animate-pulse-green flex-shrink-0 flex items-center justify-center">
+                <div className="w-10 h-10 rounded bg-spotify-green animate-pulse-green shrink-0 flex items-center justify-center">
                     <span className="text-primary-foreground text-lg">♫</span>
                 </div>
                 <div className="min-w-0">
                     <p className="text-foreground text-sm font-semibold truncate">
-                        Đang khám phá Portfolio
+                        {trackTitle}
                     </p>
                     <p className="text-muted-foreground text-xs truncate">
-                        Phạm Hoàng Thảo Uyên
+                        {artistName}
                     </p>
                 </div>
             </div>

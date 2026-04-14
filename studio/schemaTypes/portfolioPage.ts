@@ -183,6 +183,12 @@ export const portfolioPage = defineType({
         defineField({name: 'label', type: 'string', title: 'Section Label'}),
         defineField({name: 'heading', type: 'string', title: 'Greeting Heading'}),
         defineField({name: 'body', type: 'text', title: 'Bio Text'}),
+        defineField({
+          name: 'profileAvatar',
+          type: 'image',
+          title: 'Profile Avatar',
+          options: {hotspot: true},
+        }),
         defineField({name: 'buttonSkills', type: 'string', title: 'Skills Button'}),
         defineField({name: 'buttonNext', type: 'string', title: 'Next Button'}),
       ],

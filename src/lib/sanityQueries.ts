@@ -1,7 +1,21 @@
 export const portfolioPageQuery = `*[_id == "portfolioPage"][0]{
   _id,
   tabs,
+  hero,
+  profileIntro{
+    label,
+    heading,
+    body,
+    buttonSkills,
+    buttonNext,
+    profileAvatar{
+      asset->{url}
+    }
+  },
+  skills,
   projectsSection,
+  contact,
+  musicPlayer,
   "projects": projects[]->{
     _id,
     title,

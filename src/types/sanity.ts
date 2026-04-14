@@ -24,9 +24,59 @@ export interface ProjectsSectionLabels {
     nextButtonLabel?: string;
 }
 
+export interface HeroSection {
+    heading?: string;
+    subheading?: string;
+    inputPlaceholder?: string;
+    buttonContinue?: string;
+}
+
+export interface ProfileIntroSection {
+    label?: string;
+    heading?: string;
+    body?: string;
+    buttonSkills?: string;
+    buttonNext?: string;
+    profileAvatar?: {
+        asset?: {
+            url?: string;
+        };
+    };
+}
+
+export interface SkillEntry {
+    key?: string;
+    value?: string;
+}
+
+export interface SkillsSection {
+    title?: string;
+    items?: SkillEntry[];
+}
+
+export interface ContactSection {
+    heading?: string;
+    body?: string;
+    linkedinUrl?: string;
+    emailUrl?: string;
+    facebookUrl?: string;
+    phoneNumber?: string;
+    subtext?: string;
+}
+
+export interface MusicPlayerSection {
+    trackTitle?: string;
+    artistName?: string;
+}
+
 export interface PortfolioPageData {
     _id: string;
     tabs?: PortfolioTabs;
+    hero?: HeroSection;
+    profileIntro?: ProfileIntroSection;
+    skills?: SkillsSection;
     projectsSection?: ProjectsSectionLabels;
+    contact?: ContactSection;
+    musicPlayer?: MusicPlayerSection;
     projects?: ProjectItem[];
 }
