@@ -19,6 +19,30 @@ export default function WelcomePage() {
         data?.hero?.inputPlaceholder || "Nhập tên của bạn để bắt đầu...";
     const buttonContinue = data?.hero?.buttonContinue || "Tiếp tục";
 
+    const headingLines = (() => {
+        const trimmed = heading.trim();
+        const withCommaBreak = trimmed.replace(/([,，﹐､،])/u, "$1\n");
+        const byCommaOrNewline = withCommaBreak
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        if (byCommaOrNewline.length > 1) {
+            return byCommaOrNewline;
+        }
+
+        const phraseMatch = trimmed.match(/\b(mình là|toi la|tôi là)\b/i);
+        if (!phraseMatch || phraseMatch.index === undefined) {
+            return [trimmed];
+        }
+
+        const splitIndex = phraseMatch.index;
+        const firstLine = trimmed.slice(0, splitIndex).trim();
+        const secondLine = trimmed.slice(splitIndex).trim();
+
+        return secondLine ? [firstLine, secondLine] : [firstLine];
+    })();
+
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] px-6">
             <motion.div
@@ -43,8 +67,12 @@ export default function WelcomePage() {
                     />
                 </motion.div>
 
-                <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-4 leading-tight whitespace-pre-line">
-                    {heading}
+                <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-4 leading-tight">
+                    {headingLines.map((line, index) => (
+                        <span key={`${line}-${index}`} className="block">
+                            {line}
+                        </span>
+                    ))}
                 </h1>
                 <p className="text-muted-foreground text-lg mb-10">
                     {subheading}

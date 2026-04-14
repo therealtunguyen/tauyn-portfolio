@@ -140,6 +140,7 @@ export const portfolioPage = defineType({
       linkedinUrl: 'https://www.linkedin.com/in/your-handle',
       emailUrl: 'you@example.com',
       facebookUrl: 'https://www.facebook.com/your-profile',
+      instagramUrl: 'https://www.instagram.com/your-handle',
       phoneNumber: '+84 9xx xxx xxx',
     },
   },
@@ -261,6 +262,12 @@ export const portfolioPage = defineType({
           type: 'url',
           title: 'Facebook URL',
           description: 'Example: https://www.facebook.com/your-profile',
+        }),
+        defineField({
+          name: 'instagramUrl',
+          type: 'url',
+          title: 'Instagram URL',
+          description: 'Example: https://www.instagram.com/your-handle',
         }),
         defineField({
           name: 'phoneNumber',

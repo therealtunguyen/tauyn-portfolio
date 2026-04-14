@@ -14,6 +14,8 @@ export default function ThanksPage() {
         "https://www.linkedin.com/in/phamhoangthaouyên";
     const facebookUrl =
         data?.contact?.facebookUrl || "https://www.facebook.com/your-profile";
+    const instagramUrl =
+        data?.contact?.instagramUrl || "https://www.instagram.com/your-handle";
     const emailValue = data?.contact?.emailUrl || "thupam3012@gmail.com";
     const phoneValue = data?.contact?.phoneNumber || "0911579781";
     const subtext =
@@ -57,6 +59,11 @@ export default function ThanksPage() {
                             icon: Link,
                             label: "Facebook",
                             href: facebookUrl,
+                        },
+                        {
+                            icon: Link,
+                            label: "Instagram",
+                            href: instagramUrl,
                         },
                         {
                             icon: Mail,

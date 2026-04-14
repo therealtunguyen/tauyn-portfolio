@@ -58,6 +58,7 @@ export interface ContactSection {
     heading?: string;
     body?: string;
     linkedinUrl?: string;
+    instagramUrl?: string;
     emailUrl?: string;
     facebookUrl?: string;
     phoneNumber?: string;
