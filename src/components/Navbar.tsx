@@ -7,20 +7,30 @@ import {
     ChevronRight,
 } from "lucide-react";
 import spotifyLogo from "@/assets/spotify-logo.svg";
+import { usePortfolioPage } from "@/hooks/usePortfolioPage";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const navItems = [
-    { icon: Home, label: "Trang chủ", path: "/" },
-    { icon: User, label: "Hồ sơ", path: "/profile" },
-    { icon: FolderOpen, label: "Dự án", path: "/projects" },
-    { icon: Heart, label: "Liên hệ", path: "/thanks" },
-];
 
 const orderedPaths = ["/", "/profile", "/projects", "/thanks"];
 
 export default function Navbar() {
     const location = useLocation();
     const navigate = useNavigate();
+    const { data } = usePortfolioPage();
+
+    const navItems = [
+        { icon: Home, label: data?.tabs?.home || "Trang chủ", path: "/" },
+        { icon: User, label: data?.tabs?.profile || "Hồ sơ", path: "/profile" },
+        {
+            icon: FolderOpen,
+            label: data?.tabs?.projects || "Dự án",
+            path: "/projects",
+        },
+        {
+            icon: Heart,
+            label: data?.tabs?.contact || "Liên hệ",
+            path: "/thanks",
+        },
+    ];
 
     const currentIndex = orderedPaths.indexOf(location.pathname);
 

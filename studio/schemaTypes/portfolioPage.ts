@@ -35,6 +35,11 @@ export const project = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
+  initialValue: {
+    cardGradient: 'green',
+    cardEmoji: '🎵',
+    listHeaderLabel: 'KẾT QUẢ ĐẠT ĐƯỢC',
+  },
   fields: [
     defineField({
       name: 'title',
@@ -48,6 +53,28 @@ export const project = defineType({
       type: 'string',
       description: 'Example: Marketing & Sự kiện – 2025',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'cardGradient',
+      title: 'Project Card Color',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Green', value: 'green'},
+          {title: 'Emerald', value: 'emerald'},
+          {title: 'Teal', value: 'teal'},
+          {title: 'Lime', value: 'lime'},
+          {title: 'Cyan', value: 'cyan'},
+          {title: 'Sky', value: 'sky'},
+        ],
+      },
+      description: 'Color style used by the project card in grid view',
+    }),
+    defineField({
+      name: 'cardEmoji',
+      title: 'Project Card Emoji',
+      type: 'string',
+      description: 'Example: 🎵',
     }),
     defineField({
       name: 'categoryYear',
@@ -103,6 +130,11 @@ export const portfolioPage = defineType({
       profile: 'Thông tin',
       projects: 'Dự án',
       contact: 'Liên hệ',
+    },
+    projectsSection: {
+      heading: 'Dự án',
+      description: 'Tuyển chọn những công việc tốt nhất',
+      nextButtonLabel: 'Tiếp theo',
     },
     contact: {
       linkedinUrl: 'https://www.linkedin.com/in/your-handle',
@@ -173,6 +205,17 @@ export const portfolioPage = defineType({
     }),
 
     // Projects Grid Section
+    defineField({
+      name: 'projectsSection',
+      title: 'Projects Section Labels',
+      type: 'object',
+      fields: [
+        defineField({name: 'heading', title: 'Section Heading', type: 'string'}),
+        defineField({name: 'description', title: 'Section Description', type: 'string'}),
+        defineField({name: 'nextButtonLabel', title: 'Next Button Label', type: 'string'}),
+      ],
+    }),
+
     defineField({
       name: 'projects',
       title: 'Projects Grid',

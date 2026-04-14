@@ -1,12 +1,6 @@
 import { Home, User, FolderOpen, Heart } from "lucide-react";
+import { usePortfolioPage } from "@/hooks/usePortfolioPage";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const navItems = [
-    { icon: Home, label: "Trang chủ", path: "/" },
-    { icon: User, label: "Hồ sơ", path: "/profile" },
-    { icon: FolderOpen, label: "Dự án", path: "/projects" },
-    { icon: Heart, label: "Liên hệ", path: "/thanks" },
-];
 
 const pageMap: Record<string, number> = {
     "/": 1,
@@ -18,13 +12,30 @@ const pageMap: Record<string, number> = {
 export default function Sidebar() {
     const location = useLocation();
     const navigate = useNavigate();
+    const { data } = usePortfolioPage();
+
+    const navItems = [
+        { icon: Home, label: data?.tabs?.home || "Trang chủ", path: "/" },
+        { icon: User, label: data?.tabs?.profile || "Hồ sơ", path: "/profile" },
+        {
+            icon: FolderOpen,
+            label: data?.tabs?.projects || "Dự án",
+            path: "/projects",
+        },
+        {
+            icon: Heart,
+            label: data?.tabs?.contact || "Liên hệ",
+            path: "/thanks",
+        },
+    ];
+
     const currentPage = pageMap[location.pathname] || 4;
     const isProject = location.pathname.startsWith("/project/");
 
     return (
         <>
             {/* Desktop sidebar */}
-            <aside className="hidden md:flex flex-col w-[240px] min-w-[240px] bg-sidebar h-screen sticky top-0 z-30">
+            <aside className="hidden md:flex flex-col w-60 min-w-60 bg-sidebar h-screen sticky top-0 z-30">
                 <div className="p-6 pb-2">
                     <div className="flex items-center gap-2 mb-1">
                         <div className="w-8 h-8 rounded-full bg-spotify-green flex items-center justify-center">
@@ -66,7 +77,7 @@ export default function Sidebar() {
             </aside>
 
             {/* Mobile bottom nav */}
-            <nav className="md:hidden fixed bottom-[72px] left-0 right-0 bg-sidebar border-t border-sidebar-border z-40 flex justify-around py-2">
+            <nav className="md:hidden fixed bottom-18 left-0 right-0 bg-sidebar border-t border-sidebar-border z-40 flex justify-around py-2">
                 {navItems.map((item) => {
                     const active = location.pathname === item.path;
                     return (
