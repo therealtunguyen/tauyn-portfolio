@@ -79,16 +79,26 @@ export default function ProjectsPage() {
                                 }
                                 className="group text-left rounded-lg bg-card hover:bg-surface-elevated p-4 transition-colors"
                             >
-                                <div
-                                    className={`aspect-square rounded-md bg-linear-to-b ${getProjectCardGradient(project.cardGradient, i)} mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
-                                >
-                                    <span className="text-4xl opacity-60">
-                                        {getProjectCardEmoji(
-                                            project.cardEmoji,
-                                            i,
-                                        )}
-                                    </span>
-                                </div>
+                                {project.thumbnail?.asset?.url ? (
+                                    <img
+                                        src={project.thumbnail.asset.url}
+                                        alt={project.title}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="aspect-square w-full rounded-md object-cover mb-4 shadow-lg group-hover:shadow-xl transition-shadow"
+                                    />
+                                ) : (
+                                    <div
+                                        className={`aspect-square rounded-md bg-linear-to-b ${getProjectCardGradient(project.cardGradient, i)} mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
+                                    >
+                                        <span className="text-4xl opacity-60">
+                                            {getProjectCardEmoji(
+                                                project.cardEmoji,
+                                                i,
+                                            )}
+                                        </span>
+                                    </div>
+                                )}
                                 <h3 className="text-foreground font-bold text-sm truncate">
                                     {project.title}
                                 </h3>

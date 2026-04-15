@@ -77,6 +77,13 @@ export const project = defineType({
       description: 'Example: 🎵',
     }),
     defineField({
+      name: 'thumbnail',
+      title: 'Project Thumbnail',
+      type: 'image',
+      description: 'Image shown on project card and project detail hero',
+      options: {hotspot: true},
+    }),
+    defineField({
       name: 'categoryYear',
       title: 'Category and Year (Detail View)',
       type: 'string',
@@ -112,6 +119,7 @@ export const project = defineType({
     select: {
       title: 'title',
       subtitle: 'meta',
+      media: 'thumbnail',
     },
   },
 })

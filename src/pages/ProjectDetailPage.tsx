@@ -74,6 +74,7 @@ export default function ProjectDetailPage() {
     const listHeaderLabel = project.listHeaderLabel || "KẾT QUẢ ĐẠT ĐƯỢC";
     const cardGradient = getProjectCardGradient(project.cardGradient, 0);
     const cardEmoji = getProjectCardEmoji(project.cardEmoji, 0);
+    const thumbnailUrl = project.thumbnail?.asset?.url;
     const descriptionLines = (project.description || "")
         .split(/\r?\n/)
         .map((line) => line.trim())
@@ -103,11 +104,19 @@ export default function ProjectDetailPage() {
                     </button>
 
                     <div className="flex flex-col md:flex-row gap-6 md:items-end relative z-20 w-full">
-                        <div
-                            className={`w-48 h-48 md:w-60 md:h-60 shadow-[0_4px_60px_rgba(0,0,0,.5)] shrink-0 rounded-md overflow-hidden bg-linear-to-br ${cardGradient} flex items-center justify-center`}
-                        >
-                            <span className="text-6xl">{cardEmoji}</span>
-                        </div>
+                        {thumbnailUrl ? (
+                            <img
+                                src={thumbnailUrl}
+                                alt={project.title}
+                                className="w-48 h-48 md:w-60 md:h-60 shadow-[0_4px_60px_rgba(0,0,0,.5)] shrink-0 rounded-md object-cover"
+                            />
+                        ) : (
+                            <div
+                                className={`w-48 h-48 md:w-60 md:h-60 shadow-[0_4px_60px_rgba(0,0,0,.5)] shrink-0 rounded-md overflow-hidden bg-linear-to-br ${cardGradient} flex items-center justify-center`}
+                            >
+                                <span className="text-6xl">{cardEmoji}</span>
+                            </div>
+                        )}
 
                         <div className="flex flex-col gap-2">
                             <span className="text-sm font-bold tracking-widest text-foreground uppercase hidden md:block">

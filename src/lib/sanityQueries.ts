@@ -26,7 +26,10 @@ export const portfolioPageQuery = `*[_id == "portfolioPage"][0]{
     listHeaderLabel,
     results,
     cardGradient,
-    cardEmoji
+    cardEmoji,
+    thumbnail{
+      asset->{url}
+    }
   }
 }`;
 
@@ -40,5 +43,8 @@ export const projectByIdQuery = `*[_type == "project" && _id == $id][0]{
   listHeaderLabel,
   results,
   cardGradient,
-  cardEmoji
+  cardEmoji,
+  thumbnail{
+    asset->{url}
+  }
 }`;

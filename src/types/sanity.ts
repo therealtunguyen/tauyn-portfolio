@@ -9,6 +9,11 @@ export interface ProjectItem {
     results?: string[];
     cardGradient?: string;
     cardEmoji?: string;
+    thumbnail?: {
+        asset?: {
+            url?: string;
+        };
+    };
 }
 
 export interface PortfolioTabs {
